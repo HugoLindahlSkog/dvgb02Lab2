@@ -1,5 +1,5 @@
 #include "Sim_Engine.h"
-
+#include <stdio.h>
 
 /* Called from layer 5, passed the data to be sent to other side */
 void B_output( struct msg message) {
@@ -8,7 +8,7 @@ void B_output( struct msg message) {
 
 /* Called from layer 3, when a packet arrives for layer 4 */
 void B_input(struct pkt packet) {
-  /* TODO */
+  printf("packet delieverd %d, %s", packet.seqnum, packet.payload);
 }
 
 /* Called when B's timer goes off */

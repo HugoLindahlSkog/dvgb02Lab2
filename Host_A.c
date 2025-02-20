@@ -5,20 +5,22 @@
 
 /* Called from layer 5, passed the data to be sent to other side */
 void A_output( struct msg message) {
-
-  struct pkt testpacket;
-
-  testpacket.seqnum = 0;
-  testpacket.acknum = 0;
-
-
-
   
-  memcpy(testpacket.payload, message.data, sizeof(message.data));
-  
-  tolayer3(0, testpacket);
+  //Create packet
+  struct pkt packet;
+  //Define seqnumber and acknumber
+  packet.seqnum = 0;
+  packet.acknum = 0;
 
-  printf("sending packet  %d, %s", testpacket.seqnum, testpacket.payload);
+
+
+  //Copy message
+  memcpy(packet.payload, message.data, sizeof(message.data));
+  //Send packet to layer 3 (Host B)
+  tolayer3(0, packet);
+
+  //printf to see if it works
+  printf("sending packet  %d, %s", packet.seqnum, packet.payload);
 
 
   
