@@ -2,6 +2,18 @@
 #include <string.h>
 #include <stdio.h> 
 
+//helpfunction to calculate checksum, seqnum + acknum
+static int calc_checksum(struct pkt packet)
+{
+  int checksum = packet.seqnum + packet.acknum;
+
+  for(int i = 0; i < sizeof(packet.payload); i++)
+  {
+    checksum += packet.payload[i];
+ 
+  }
+  return checksum;
+}
 
 /* Called from layer 5, passed the data to be sent to other side */
 void A_output( struct msg message) {
@@ -16,11 +28,13 @@ void A_output( struct msg message) {
 
   //Copy message
   memcpy(packet.payload, message.data, sizeof(message.data));
+  
+  packet.checksum = calc_checksum(packet);
   //Send packet to layer 3 (Host B)
   tolayer3(0, packet);
 
   //printf to see if it works
-  printf("sending packet  %d, %s", packet.seqnum, packet.payload);
+  printf("sending packet  %d, %d, %s", packet.seqnum, packet.checksum, packet.payload);
 
   
   
