@@ -22,14 +22,20 @@ void A_output( struct msg message) {
   //printf to see if it works
   printf("sending packet  %d, %s", packet.seqnum, packet.payload);
 
-
+  
   
 
 }
 
 /* Called from layer 3, when a packet arrives for layer 4 */
 void A_input(struct pkt packet) {
-  /* TODO */
+ 
+ 
+  if(packet.acknum == 1)
+  {
+
+    printf("Recieved ack for packet %d", packet.seqnum);
+  }
 }
 
 /* Called when A's timer goes off */
