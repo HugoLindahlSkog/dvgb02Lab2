@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 
+
+int B_seqnum = 0;
+struct pkt ack_packet;
+
  static int calc_checksum(struct pkt packet)
 {
   int checksum = packet.seqnum + packet.acknum;
@@ -21,22 +25,26 @@ void B_output( struct msg message) {
 /* Called from layer 3, when a packet arrives for layer 4 */
 void B_input(struct pkt packet) {
  
- int rec_checksum = calc_checksum(packet);
- 
- if(packet.checksum != rec_checksum)
- {
-  printf("corrupt packet\n");
-  return;
- }
-  struct pkt ack_packet;
+if(packet.seqnum == B_seqnum) //if seqnum is expected seqnum
+{
+  tolayer5(1, packet.payload); //send to layer 5
 
-  printf("packet delieverd %d, %s\n", packet.seqnum, packet.payload);
+  ack_packet.acknum = B_seqnum; //set ack num to expected seqnum
+  ack_packet.seqnum = 0;  //set seqnum to standard
+  ack_packet.checksum = calc_checksum(ack_packet);
 
-  ack_packet.seqnum = packet.seqnum; //same seqnum
-  ack_packet.acknum = 1; //Ack is 1
-  ack_packet.checksum = calc_checksum(packet);
+  tolayer3(1, ack_packet); //send to layer 3
 
+  B_seqnum = (B_seqnum + 1) % 2; //chnage to next seqnum
+} else {
+
+  printf("Duplicerat packet, skickar om senaste ACK\n");
+
+  ack_packet.acknum = (B_seqnum + 1) % 2; //send latest ACK
+  ack_packet.checksum = calc_checksum(ack_packet);
   tolayer3(1, ack_packet);
+}
+
 
 }
 

@@ -2,6 +2,12 @@
 #include <string.h>
 #include <stdio.h> 
 
+
+int A_seqnum = 0;
+int wait_ACK = 0;
+struct pkt last_packet;
+
+
 //helpfunction to calculate checksum, seqnum + acknum
 static int calc_checksum(struct pkt packet)
 {
@@ -15,16 +21,23 @@ static int calc_checksum(struct pkt packet)
   return checksum;
 }
 
-struct pkt last_packet;
 
 /* Called from layer 5, passed the data to be sent to other side */
 void A_output( struct msg message) {
   
+if (wait_ACK)
+{
+  //wait for ack before sending new packet
+  printf("Väntar på ACK, kan ej skicka nytt packet\n");
+  return;
+}
+
+
   //Create packet
   struct pkt packet;
   //Define seqnumber and acknumber
-  packet.seqnum = 0;
-  packet.acknum = 0;
+  packet.seqnum = A_seqnum; //set seqnum to 0 or 1
+  packet.acknum = 0; 
 
 
 
@@ -33,7 +46,7 @@ void A_output( struct msg message) {
   
   packet.checksum = calc_checksum(packet);
 
-  memcpy(&last_packet, &packet, sizeof(struct pkt));
+  memcpy(&last_packet, &packet, sizeof(struct pkt)); //save last packet
   //Send packet to layer 3 (Host B)
   tolayer3(0, packet);
 
@@ -42,20 +55,22 @@ void A_output( struct msg message) {
 
   //printf to see if it works
   printf(" sending packet  %d, %d, %s\n", packet.seqnum, packet.checksum, packet.payload);
-
+  wait_ACK = 1; //wait for ACK
   
-  
-
 }
 
 /* Called from layer 3, when a packet arrives for layer 4 */
 void A_input(struct pkt packet) {
  
- 
-  if(packet.acknum == 1)
+
+
+  if(packet.acknum == A_seqnum)
   {
     stoptimer(0);
-    printf(" Recieved ack for packet %d\n", packet.seqnum);
+    printf("Recieved ack for packet %d\n", packet.seqnum);
+
+    A_seqnum = (A_seqnum + 1) % 2;
+    wait_ACK = 0; 
   }
 }
 
