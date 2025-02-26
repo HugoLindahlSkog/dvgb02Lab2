@@ -30,7 +30,7 @@ void B_input(struct pkt packet) {
  }
   struct pkt ack_packet;
 
-  printf("packet delieverd %d, %s", packet.seqnum, packet.payload);
+  printf("packet delieverd %d, %s\n", packet.seqnum, packet.payload);
 
   ack_packet.seqnum = packet.seqnum; //same seqnum
   ack_packet.acknum = 1; //Ack is 1

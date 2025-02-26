@@ -34,7 +34,7 @@ void A_output( struct msg message) {
   tolayer3(0, packet);
 
   //printf to see if it works
-  printf("sending packet  %d, %d, %s", packet.seqnum, packet.checksum, packet.payload);
+  printf(" sending packet  %d, %d, %s\n", packet.seqnum, packet.checksum, packet.payload);
 
   
   
@@ -48,7 +48,7 @@ void A_input(struct pkt packet) {
   if(packet.acknum == 1)
   {
 
-    printf("Recieved ack for packet %d", packet.seqnum);
+    printf(" Recieved ack for packet %d\n", packet.seqnum);
   }
 }
 
