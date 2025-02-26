@@ -54,7 +54,7 @@ void A_input(struct pkt packet) {
  
   if(packet.acknum == 1)
   {
-
+    stoptimer(0);
     printf(" Recieved ack for packet %d\n", packet.seqnum);
   }
 }
