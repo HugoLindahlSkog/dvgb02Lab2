@@ -15,6 +15,8 @@ static int calc_checksum(struct pkt packet)
   return checksum;
 }
 
+struct pkt last_packet;
+
 /* Called from layer 5, passed the data to be sent to other side */
 void A_output( struct msg message) {
   
@@ -30,8 +32,13 @@ void A_output( struct msg message) {
   memcpy(packet.payload, message.data, sizeof(message.data));
   
   packet.checksum = calc_checksum(packet);
+
+  memcpy(&last_packet, &packet, sizeof(struct pkt));
   //Send packet to layer 3 (Host B)
   tolayer3(0, packet);
+
+  starttimer(0, 15.0);
+
 
   //printf to see if it works
   printf(" sending packet  %d, %d, %s\n", packet.seqnum, packet.checksum, packet.payload);
@@ -54,7 +61,10 @@ void A_input(struct pkt packet) {
 
 /* Called when A's timer goes off */
 void A_timerinterrupt() {
-  /* TODO */
+  printf("A_timerinterupt: Sending packet again...\n");
+  tolayer3(0, last_packet);
+
+  starttimer(0, 15.0);
 }  
 
 /* The following routine will be called once (only) before any other */
