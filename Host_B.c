@@ -25,6 +25,18 @@ void B_output( struct msg message) {
 /* Called from layer 3, when a packet arrives for layer 4 */
 void B_input(struct pkt packet) {
  
+if (packet.checksum != calc_checksum(packet))
+{
+  printf("B_input: Paket är korrupt, ignorerar.\n");
+  return;
+}
+
+  printf("B_input: Received packet %d, checksum: %d, payload: %s\n", 
+    packet.seqnum, packet.checksum, packet.payload); //debug
+
+    printf("DEBUG: B received raw payload: %s\n", packet.payload);
+//debug
+
 if(packet.seqnum == B_seqnum) //if seqnum is expected seqnum
 {
   tolayer5(1, packet.payload); //send to layer 5

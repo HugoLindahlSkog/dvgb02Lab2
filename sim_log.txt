@@ -1,0 +1,186 @@
+-----  Stop and Wait Network Simulator Version 1.1 -------- 
+
+The number of messages to simulate: 20
+Packet loss probability: 0.200000
+Packet corruption probability: 0.200000
+Average time between messages from sender's layer 5: 10.000000
+Trace: 2
+
+Event time: 18.705740,  Type: 1, From layer 5 , Entity: 0
+ sending packet  0, 1843, aaaaaaaaaaaaaaaaaaa
+
+Event time: 24.170835,  Type: 2, from layer 3 , Entity: 1
+Packet [33ma[0m recieved at B in [32mcorrect order[0m
+          TOLAYER3: Packet being corrupted
+
+Event time: 29.402449,  Type: 2, from layer 3 , Entity: 0
+Mottaget ACK är korrupt, ignorerar
+
+Event time: 33.705742,  Type: 0, Timer interrupt  , Entity: 0
+A_timerinterupt: Sending packet again...
+          TOLAYER3: Packet being lost
+
+Event time: 35.124840,  Type: 1, From layer 5 , Entity: 0
+Warning: Attempt to start a timer that is already started
+ sending packet  0, 1862, bbbbbbbbbbbbbbbbbbb
+
+Event time: 37.392609,  Type: 1, From layer 5 , Entity: 0
+Väntar på ACK, kan ej skicka nytt packet
+
+Event time: 38.057533,  Type: 1, From layer 5 , Entity: 0
+Väntar på ACK, kan ej skicka nytt packet
+
+Event time: 44.369377,  Type: 2, from layer 3 , Entity: 1
+Duplicerat packet, skickar om senaste ACK
+          TOLAYER3: Packet being lost
+
+Event time: 46.880825,  Type: 1, From layer 5 , Entity: 0
+Väntar på ACK, kan ej skicka nytt packet
+
+Event time: 48.705742,  Type: 0, Timer interrupt  , Entity: 0
+A_timerinterupt: Sending packet again...
+
+Event time: 53.977970,  Type: 2, from layer 3 , Entity: 1
+Duplicerat packet, skickar om senaste ACK
+
+Event time: 55.466171,  Type: 1, From layer 5 , Entity: 0
+          TOLAYER3: Packet being lost
+Warning: Attempt to start a timer that is already started
+ sending packet  0, 1938, fffffffffffffffffff
+
+Event time: 58.180611,  Type: 2, from layer 3 , Entity: 0
+Recieved ack for packet 0
+
+Event time: 73.285423,  Type: 1, From layer 5 , Entity: 0
+ sending packet  1, 1958, ggggggggggggggggggg
+
+Event time: 75.651764,  Type: 2, from layer 3 , Entity: 1
+Packet [33mg[0m recieved at B in [32mcorrect order[0m
+          TOLAYER3: Packet being corrupted
+
+Event time: 77.435684,  Type: 2, from layer 3 , Entity: 0
+Mottaget ACK är korrupt, ignorerar
+
+Event time: 88.073296,  Type: 1, From layer 5 , Entity: 0
+Väntar på ACK, kan ej skicka nytt packet
+
+Event time: 88.285423,  Type: 0, Timer interrupt  , Entity: 0
+A_timerinterupt: Sending packet again...
+          TOLAYER3: Packet being corrupted
+
+Event time: 95.487259,  Type: 2, from layer 3 , Entity: 1
+Duplicerat packet, skickar om senaste ACK
+
+Event time: 98.117912,  Type: 2, from layer 3 , Entity: 0
+Recieved ack for packet 0
+
+Event time: 99.737778,  Type: 1, From layer 5 , Entity: 0
+          TOLAYER3: Packet being lost
+ sending packet  0, 1995, iiiiiiiiiiiiiiiiiii
+
+Event time: 114.737778,  Type: 0, Timer interrupt  , Entity: 0
+A_timerinterupt: Sending packet again...
+
+Event time: 115.796242,  Type: 2, from layer 3 , Entity: 1
+Packet [33mi[0m recieved at B in [32mcorrect order[0m
+          TOLAYER3: Packet being lost
+
+Event time: 119.202774,  Type: 1, From layer 5 , Entity: 0
+          TOLAYER3: Packet being corrupted
+Warning: Attempt to start a timer that is already started
+ sending packet  0, 2014, jjjjjjjjjjjjjjjjjjj
+
+Event time: 124.781387,  Type: 2, from layer 3 , Entity: 1
+Duplicerat packet, skickar om senaste ACK
+          TOLAYER3: Packet being corrupted
+
+Event time: 127.918045,  Type: 1, From layer 5 , Entity: 0
+Väntar på ACK, kan ej skicka nytt packet
+
+Event time: 129.737778,  Type: 0, Timer interrupt  , Entity: 0
+A_timerinterupt: Sending packet again...
+
+Event time: 131.031326,  Type: 2, from layer 3 , Entity: 0
+Mottaget ACK är korrupt, ignorerar
+
+Event time: 132.615616,  Type: 2, from layer 3 , Entity: 1
+Duplicerat packet, skickar om senaste ACK
+
+Event time: 134.372437,  Type: 1, From layer 5 , Entity: 0
+Warning: Attempt to start a timer that is already started
+ sending packet  0, 2052, lllllllllllllllllll
+
+Event time: 135.649902,  Type: 2, from layer 3 , Entity: 1
+Duplicerat packet, skickar om senaste ACK
+          TOLAYER3: Packet being corrupted
+
+Event time: 136.277374,  Type: 2, from layer 3 , Entity: 0
+Recieved ack for packet 0
+
+Event time: 141.895050,  Type: 2, from layer 3 , Entity: 0
+Mottaget ACK är korrupt, ignorerar
+
+Event time: 152.667465,  Type: 1, From layer 5 , Entity: 0
+          TOLAYER3: Packet being lost
+ sending packet  1, 2072, mmmmmmmmmmmmmmmmmmm
+
+Event time: 154.841629,  Type: 1, From layer 5 , Entity: 0
+Väntar på ACK, kan ej skicka nytt packet
+
+Event time: 159.057770,  Type: 1, From layer 5 , Entity: 0
+Väntar på ACK, kan ej skicka nytt packet
+
+Event time: 160.849640,  Type: 1, From layer 5 , Entity: 0
+Väntar på ACK, kan ej skicka nytt packet
+
+Event time: 163.272491,  Type: 1, From layer 5 , Entity: 0
+Väntar på ACK, kan ej skicka nytt packet
+
+Event time: 167.667465,  Type: 0, Timer interrupt  , Entity: 0
+A_timerinterupt: Sending packet again...
+          TOLAYER3: Packet being lost
+
+Event time: 178.256805,  Type: 1, From layer 5 , Entity: 0
+Warning: Attempt to start a timer that is already started
+ sending packet  1, 2167, rrrrrrrrrrrrrrrrrrr
+
+Event time: 182.667465,  Type: 0, Timer interrupt  , Entity: 0
+A_timerinterupt: Sending packet again...
+          TOLAYER3: Packet being corrupted
+
+Event time: 184.948151,  Type: 2, from layer 3 , Entity: 1
+Packet [33mr[0m recieved at B in [32mcorrect order[0m
+
+Event time: 189.394928,  Type: 1, From layer 5 , Entity: 0
+          TOLAYER3: Packet being lost
+Warning: Attempt to start a timer that is already started
+ sending packet  1, 2186, sssssssssssssssssss
+
+Event time: 190.335007,  Type: 2, from layer 3 , Entity: 0
+Recieved ack for packet 0
+
+Event time: 190.420761,  Type: 2, from layer 3 , Entity: 1
+Duplicerat packet, skickar om senaste ACK
+
+Event time: 191.944473,  Type: 2, from layer 3 , Entity: 0
+Felaktigt ACK (1), förväntade 0. ignorerar.
+
+Event time: 204.643692,  Type: 1, From layer 5 , Entity: 0
+ sending packet  0, 2204, ttttttttttttttttttt
+
+Event time: 214.078186,  Type: 2, from layer 3 , Entity: 1
+Packet [33mt[0m recieved at B in [32mcorrect order[0m
+
+Event time: 219.643692,  Type: 0, Timer interrupt  , Entity: 0
+A_timerinterupt: Sending packet again...
+
+Event time: 222.904083,  Type: 2, from layer 3 , Entity: 0
+Recieved ack for packet 0
+
+Event time: 229.491669,  Type: 2, from layer 3 , Entity: 1
+Duplicerat packet, skickar om senaste ACK
+
+Event time: 232.236908,  Type: 2, from layer 3 , Entity: 0
+Felaktigt ACK (0), förväntade 1. ignorerar.
+
+Simulator terminated at time 232.236908 after sending 20 messages from layer 5

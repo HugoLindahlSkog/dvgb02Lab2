@@ -25,6 +25,9 @@ static int calc_checksum(struct pkt packet)
 /* Called from layer 5, passed the data to be sent to other side */
 void A_output( struct msg message) {
   
+  printf("DEBUG: A_output called with payload: %s\n", message.data);
+//debug
+
 if (wait_ACK)
 {
   //wait for ack before sending new packet
@@ -42,12 +45,20 @@ if (wait_ACK)
 
 
   //Copy message
-  memcpy(packet.payload, message.data, sizeof(message.data));
+  memset(packet.payload, 0, sizeof(packet.payload)); 
+  memcpy(packet.payload, message.data, 20);
   
   packet.checksum = calc_checksum(packet);
 
   memcpy(&last_packet, &packet, sizeof(struct pkt)); //save last packet
   //Send packet to layer 3 (Host B)
+
+  printf("A_output: Attempting to send packet %d, payload: %s\n", 
+    packet.seqnum, message.data); //debug
+
+    printf("DEBUG: A sending packet %d with payload: %s\n", packet.seqnum, packet.payload);
+//debug
+
   tolayer3(0, packet);
 
   starttimer(0, 15.0);
@@ -62,7 +73,14 @@ if (wait_ACK)
 /* Called from layer 3, when a packet arrives for layer 4 */
 void A_input(struct pkt packet) {
  
+ if (packet.checksum != calc_checksum(packet))
+ {
+  printf("Mottaget ACK är korrupt, ignorerar\n");
+  return;
+ }
 
+ printf("A_input: Received ACK %d, expected ACK %d\n", packet.acknum, A_seqnum);
+ //debug
 
   if(packet.acknum == A_seqnum)
   {
@@ -71,12 +89,18 @@ void A_input(struct pkt packet) {
 
     A_seqnum = (A_seqnum + 1) % 2; //change seqnum
     wait_ACK = 0; 
+  } else {
+    printf("Felaktigt ACK (%d), förväntade %d. ignorerar.\n", packet.acknum, A_seqnum);
   }
 }
 
 /* Called when A's timer goes off */
 void A_timerinterrupt() {
   printf("A_timerinterupt: Sending packet again...\n");
+
+  printf("A_timerinterrupt: Resending packet %d, payload: %s\n", 
+    last_packet.seqnum, last_packet.payload); //debug
+
   tolayer3(0, last_packet);
 
   starttimer(0, 15.0);
