@@ -66,10 +66,10 @@ void A_input(struct pkt packet) {
 
   if(packet.acknum == A_seqnum)
   {
-    stoptimer(0);
+    stoptimer(0); //if acknum is same as seqnum, stop timer
     printf("Recieved ack for packet %d\n", packet.seqnum);
 
-    A_seqnum = (A_seqnum + 1) % 2;
+    A_seqnum = (A_seqnum + 1) % 2; //change seqnum
     wait_ACK = 0; 
   }
 }
