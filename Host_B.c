@@ -27,15 +27,10 @@ void B_input(struct pkt packet) {
  
 if (packet.checksum != calc_checksum(packet))
 {
-  printf("B_input: Paket är korrupt, ignorerar.\n");
   return;
 }
 
-  printf("B_input: Received packet %d, checksum: %d, payload: %s\n", 
-    packet.seqnum, packet.checksum, packet.payload); //debug
 
-    printf("DEBUG: B received raw payload: %s\n", packet.payload);
-//debug
 
 if(packet.seqnum == B_seqnum) //if seqnum is expected seqnum
 {
@@ -50,7 +45,6 @@ if(packet.seqnum == B_seqnum) //if seqnum is expected seqnum
   B_seqnum = (B_seqnum + 1) % 2; //chnage to next seqnum
 } else {
 
-  printf("Duplicerat packet, skickar om senaste ACK\n");
 
   ack_packet.acknum = (B_seqnum + 1) % 2; //send latest ACK
   ack_packet.checksum = calc_checksum(ack_packet);
